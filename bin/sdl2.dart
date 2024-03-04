@@ -15,7 +15,7 @@ void main(List<String> arguments) {
   }
 
   final window = SDL_CreateWindow(
-    'Some amazing títle?',
+    'Some amazing title?',
     SDL_WINDOWPOS_CENTERED,
     SDL_WINDOWPOS_CENTERED,
     600,
@@ -47,7 +47,7 @@ void main(List<String> arguments) {
     SDL_SetWindowIcon(window, icon);
   }
 
-  final image = IMG_LoadTexture(renderer, 'img.png');
+  final image = IMG_LoadTexture(renderer, 'images/img.png');
   final iconTex = SDL_CreateTextureFromSurface(renderer, icon!);
 
   print(SDL_QueryTexture(iconTex));
@@ -85,12 +85,13 @@ bool _pollEvents() {
 
 void _render(SDL_Renderer renderer, SDL_Texture image, SDL_Texture iconTex) {
   //  === RENDER ===
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
-  SDL_SetRenderDrawColor(renderer, 160, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 120, 0, 0, 255);
   SDL_RenderFillRect(renderer, SDL_Rect(10, 10, 200, 100));
 
-  SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 120, 255);
   SDL_RenderDrawPoint(renderer, 200, 200);
   SDL_RenderDrawLine(renderer, 250, 200, 300, 300);
   SDL_RenderDrawRect(renderer, SDL_Rect(220, 10, 100, 100));
@@ -106,21 +107,18 @@ void _render(SDL_Renderer renderer, SDL_Texture image, SDL_Texture iconTex) {
       List.generate(5, (i) => SDL_Rect(10 + i * 30, 10 + i * 30, 50, 50));
   SDL_RenderFillRects(renderer, fills);
 
-  SDL_RenderCopyEx(
+  SDL_RenderCopy(
     renderer,
     image,
     null,
-    SDL_Rect(100, 100, 100, 100),
-    20,
-    null,
-    SDL_RendererFlip.SDL_FLIP_NONE,
+    SDL_Rect(100, 300, 100, 100),
   );
 
   SDL_RenderCopyEx(
     renderer,
     image,
     null,
-    SDL_Rect(200, 100, 100, 100),
+    SDL_Rect(300, 300, 100, 100),
     20,
     null,
     SDL_RendererFlip.SDL_FLIP_NONE,
